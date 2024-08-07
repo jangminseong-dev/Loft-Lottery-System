@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 from random import shuffle
-from Comunication import loadSpreadSheetData, writeResultData
+from Comunication import loadSpreadSheetData, writeResultData, sendFinalResultData
 
 #아래의 리스트는 앞쪽에 있을 수록 퀄리티가 좋은 로프트의 리스트입니다.
 loft = ["HDF LOFT1", "HDF LOFT2", "HDF LOFT3", "MS 1층 작업실", "MS 1층 회의실", "MS 2층 LOFT1", "MS 2층 LOFT3", "메이커스페이스 2층 회의실", "MS 2층 LOFT3"]
@@ -28,7 +28,5 @@ applicantsList = loadSpreadSheetData() #구글 폼 응답 리스트를 불러옵
 todayApplicantsList = filterTodayApplicants(applicantsList) #오늘 날짜인 응답만 걸러냅니다.
 finalApplicantsList = loftLottery(todayApplicantsList) #로프트를 랜덤 배정합니다.
 
+sendFinalResultData(finalApplicantsList)
 writeResultData(finalApplicantsList, True) #최종 배정 결과를 개시합니다.
-
-for value in finalApplicantsList:
-    print(value[3], value[6])
